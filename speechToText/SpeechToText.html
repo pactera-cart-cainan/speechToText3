@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Web Chat: Using Direct Line Speech</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.botframework.com/botframework-webchat/latest/webchat.js"></script>
+    <link href="https://cdn.botframework.com/botframework-webchat/latest/botchat.css" rel="stylesheet" />
+
+    <style>
+      .example {
+        float: left;
+        margin-right: 20px;
+        width: 300px;
+      }
+
+      .example > h2 {
+        font-family: 'Segoe UI';
+      }
+     html, body { height: 100% }
+     body { margin: 0 }
+     #webchat {
+       border: 1px solid #333;
+        float: left;
+        height: 600px;
+        position: relative;
+        width: 460px;
+     }
+    </style>
+  </head>
+  <body>
+    <section class="example">
+      <h2>Web Chat with speech</h2>
+      <p>
+        This sample shows the various options for enabling speech recognition and speech synthesis in the Web Chat
+      </p>
+    </section>
+
+    <div id="webchat" role="main"></div>
+
+    <script>
+         (async function () {
+
+            window.WebChat.renderWebChat({
+            directLine: createDirectLine({
+                secret: '6lCAUC8O6Qc.oKjAliUnvK3VFlmYxbMam4REpiiQnOoFzI9sCKp89OI'
+              }),
+              language: 'ja-JP',
+              webSpeechPonyfillFactory: await createCognitiveServicesSpeechServicesPonyfillFactory({
+                region: 'eastasia',
+                subscriptionKey: '879b1beb971d4410811cf76aae7c2311'
+              })
+            }, document.getElementById('webchat'));
+            document.querySelector('#webchat > *').focus();
+          })().catch(err => console.error(err));
+    </script>
+  </body>
+</html>
